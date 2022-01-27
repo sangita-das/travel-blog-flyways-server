@@ -245,6 +245,8 @@ async function run(){
         res.json(result)
       })
 
+      
+
       app.delete('/blog/:id', async(req, res)=>{
         const id = req.params;
         const filter = { _id : ObjectId(id)};
