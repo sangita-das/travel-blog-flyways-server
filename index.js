@@ -25,14 +25,14 @@ async function run(){
 
          const database = client.db('Flyways_Travel_Blog')
 
-         const servicetCollection = database.collection('services')
+         const serviceCollection = database.collection('services')
          const orderCollection = database.collection('Orders')
          const reviewCollection = database.collection('reviews')
          const usersCollection = database.collection('users')
          const blogsCollection = database.collection('blogs')
 
          app.get('/services', async (req, res)=>{
-             const result =  servicetCollection.find({});
+             const result =  serviceCollection.find({});
              const services = await result.toArray();
 
              res.json(services)
@@ -40,21 +40,21 @@ async function run(){
 
          app.post('/services', async(req, res)=>{
              const services = req.body;
-             const result = await servicetCollection.insertOne(product)
+             const result = await serviceCollection.insertOne(product)
              res.json(result)
          })
 
          app.get('/services/:id', async (req, res)=>{
              const id = req.params.id;
              const query = {_id: ObjectId(id)}
-             const result = await servicetCollection.findOne(query)
+             const result = await serviceCollection.findOne(query)
              res.json(result)
          })
 
          app.delete('/services/:id' , async (req, res)=>{
              const id = req.params.id;
              const query = {_id : ObjectID(id)};
-             const result = await servicetCollection.deleteOne(query)
+             const result = await serviceCollection.deleteOne(query)
              res.json(result)
          })
 
