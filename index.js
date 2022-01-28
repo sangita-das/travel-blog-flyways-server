@@ -230,14 +230,24 @@ async function run(){
 
 
 
-      app.get('/blog/:id', async(req, res) => {
-        const id = req.params;
-        const filter = { _id : ObjectId(id)};
-        const query = await blogsCollection.findOne(filter)
-        res.json(query)
+      // app.get('/blog/:id', async(req, res) => {
+      //   const id = req.params;
+      //   const filter = { _id : ObjectId(id)};
+      //   const query = await blogsCollection.findOne(filter)
+      //   res.json(query)
+      // })
+
+
+     
+
+      app.get('/blogs/:id', async(req, res) => {
+        const id = req.params.id;
+        const query = { _id : ObjectId(id)};
+        const result = await blogsCollection.findOne(query)
+        res.json(result)
       })
 
-      app.put('/blog/:id', async(req, res) =>{
+      app.put('/blogs/:id', async(req, res) =>{
         const id = req.params;
         const filter = { _id : ObjectId(id)};
         const updateDoc = { $set : {status: 'active'} }
@@ -245,9 +255,8 @@ async function run(){
         res.json(result)
       })
 
-      
 
-      app.delete('/blog/:id', async(req, res)=>{
+      app.delete('/blogs/:id', async(req, res)=>{
         const id = req.params;
         const filter = { _id : ObjectId(id)};
         const query = await blogsCollection.deleteOne(filter)
